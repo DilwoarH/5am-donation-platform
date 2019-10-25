@@ -1,24 +1,23 @@
-var stripe = Stripe('pk_live_P4tKSsMQGwGxhiAHaNslM6uN00lxfM8uaN');
+var stripe = Stripe('pk_live_bViOyjIuyMPMFeIBSkRV1FV000fkLhB6mF');
 
-var checkoutButton = document.getElementById('checkout-button-plan_FlksSXySJfyBAM');
+var checkoutButton = document.getElementById('checkout-button-plan_G2wvrRjaTDMeie');
 var amount = document.getElementById('amount');
 checkoutButton.addEventListener('click', function () {
+  checkoutButton.disabled = true;
   // When the customer clicks on the button, redirect
   // them to Checkout.
 
   try {
-    var quantity = amount.value.length ? parseInt(amount.value) : 1;
-
     stripe.redirectToCheckout({
-      items: [{plan: 'plan_FlksSXySJfyBAM', quantity: quantity}],
+      items: [{plan: 'plan_G2wvrRjaTDMeie', quantity: 1}],
 
       // Do not rely on the redirect to the successUrl for fulfilling
       // purchases, customers may not always reach the success_url after
       // a successful payment.
       // Instead use one of the strategies described in
       // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: 'https://donate.mosque.tech/success.html',
-      cancelUrl: 'https://donate.mosque.tech/cancelled.html',
+      successUrl: 'https://5am.netlify.com/success.html',
+      cancelUrl: 'https://5am.netlify.com/cancelled.html',
     })
     .then(function (result) {
       if (result.error) {
