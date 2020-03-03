@@ -1,7 +1,6 @@
 var stripe = Stripe('pk_live_bViOyjIuyMPMFeIBSkRV1FV000fkLhB6mF');
 
 var checkoutButton = document.getElementById('checkout-button-plan_G2wvrRjaTDMeie');
-var amount = document.getElementById('amount');
 checkoutButton.addEventListener('click', function () {
   checkoutButton.disabled = true;
   // When the customer clicks on the button, redirect
@@ -31,14 +30,13 @@ checkoutButton.addEventListener('click', function () {
   } catch (error) {
     var displayError = document.getElementById('error-message');
     displayError.textContent = error.message;
-    amount.classList.add('govuk-input--error');
   }
 });
 
 // ONE OFF PAYMENT
 
 var oneOff_checkoutButton = document.getElementById('checkout-button-sku_Gq6VFrlK5gP4sc');
-var oneOff_amount = document.getElementById('one-off-amount').value;
+var oneOff_amount = document.getElementById('one-off-amount');
 oneOff_checkoutButton.addEventListener('click', function () {
   oneOff_checkoutButton.disabled = true;
   // When the customer clicks on the button, redirect
@@ -46,7 +44,7 @@ oneOff_checkoutButton.addEventListener('click', function () {
 
   try {
     stripe.redirectToCheckout({
-      items: [{sku: 'sku_Gq6VFrlK5gP4sc', quantity: parseInt(oneOff_amount)}],
+      items: [{sku: 'sku_Gq6VFrlK5gP4sc', quantity: parseInt(oneOff_amount.value)}],
 
       // Do not rely on the redirect to the successUrl for fulfilling
       // purchases, customers may not always reach the success_url after
